@@ -33,6 +33,8 @@ namespace AngryWasp.Net
 
         public ulong PeerId => peerId;
 
+        public IPAddress Address => ((IPEndPoint)client.Client.RemoteEndPoint).Address;
+
         public Connection(TcpClient client, ulong peerId, int port, Direction direction)
         {
             this.readBuffer = new byte[Config.READ_BUFFER_SIZE];
