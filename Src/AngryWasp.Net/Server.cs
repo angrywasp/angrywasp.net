@@ -10,14 +10,14 @@ namespace AngryWasp.Net
     {
         TcpListener listener;
 
-        private static int port = 0;
+        private static ushort port = 0;
         private static ulong peerId = 0;
 
-        public static int Port => port;
+        public static ushort Port => port;
 
         public static ulong PeerID => peerId;
 
-        public void Start(int serverPort = Config.DEFAULT_PORT, ulong pid = 0)
+        public void Start(ushort serverPort = Config.DEFAULT_PORT, ulong pid = 0)
         {
             port = serverPort;
             peerId = pid;
@@ -85,7 +85,7 @@ namespace AngryWasp.Net
 
                 int offset = 0;
                 ulong peerId = BitShifter.ToULong(body, ref offset);
-                int peerPort = BitShifter.ToInt(body, ref offset);
+                ushort peerPort = BitShifter.ToUShort(body, ref offset);
 
                 //send a handshake packet back to the client to acknowledge the connection
                 ns.Write(Handshake.GenerateRequest(false));

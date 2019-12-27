@@ -1,5 +1,6 @@
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Net;
 using System.Net.Sockets;
 using AngryWasp.Helpers;
@@ -21,7 +22,7 @@ namespace AngryWasp.Net
         private DataProcessor dataProcessor;
         private int failureCount = 0;
         private Direction direction = Direction.Invalid;
-        private int port = 0;
+        private ushort port = 0;
         private ulong peerId = 0;
         AsyncCallback readCallback;
 
@@ -29,13 +30,13 @@ namespace AngryWasp.Net
 
         public Direction Direction => direction;
 
-        public int Port => port;
+        public ushort Port => port;
 
         public ulong PeerId => peerId;
 
         public IPAddress Address => ((IPEndPoint)client.Client.RemoteEndPoint).Address;
 
-        public Connection(TcpClient client, ulong peerId, int port, Direction direction)
+        public Connection(TcpClient client, ulong peerId, ushort port, Direction direction)
         {
             this.readBuffer = new byte[Config.READ_BUFFER_SIZE];
             this.client = client;
@@ -96,7 +97,7 @@ namespace AngryWasp.Net
 
             List<byte> bytes = new List<byte>();
 
-            bytes.AddRange(r.Address.GetAddressBytes());
+            bytes.AddRange(r.Address.MapToIPv4().GetAddressBytes());
             bytes.AddRange(BitShifter.ToByte((ushort)port));
             bytes.AddRange(BitShifter.ToByte(peerId));
 

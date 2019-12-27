@@ -8,7 +8,7 @@ namespace AngryWasp.Net
 {
     public class Client
     {
-        public void Connect(string host, int port)
+        public void Connect(string host, ushort port)
         {
             Task.Run( () =>
             {
@@ -53,7 +53,7 @@ namespace AngryWasp.Net
 
                     int offset = 0;
                     ulong peerId = BitShifter.ToULong(body, ref offset);
-                    int serverPort = BitShifter.ToInt(body, ref offset);
+                    ushort serverPort = BitShifter.ToUShort(body, ref offset);
 
                     ConnectionManager.Add(new Connection(client, peerId, serverPort, Direction.Outgoing));
                 }

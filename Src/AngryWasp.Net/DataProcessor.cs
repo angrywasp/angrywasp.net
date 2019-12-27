@@ -1,5 +1,4 @@
 using System;
-using System.Net.Sockets;
 using AngryWasp.Logger;
 
 namespace AngryWasp.Net
@@ -34,12 +33,10 @@ namespace AngryWasp.Net
 
                 c.ResumeRead();
                 
-                Log.Instance.Write($"Got {received.Length} bytes of data");
                 Header header;
                 byte[] body;
                 if (!ParseBuffer(received, out header, out body))
                 {
-                    Log.Instance.Write(Log_Severity.Error, $"Could not process data package");
                     c.AddFailure();
                     return;
                 }
@@ -59,7 +56,7 @@ namespace AngryWasp.Net
 
             if (data.Length < Header.LENGTH)
             {
-                Log.Instance.Write(Log_Severity.Error, "Incomplete data packet received");
+                Log.Instance.Write(Log_Severity.Error, "Incomplete header received");
                 return false;
             }
 
@@ -71,7 +68,7 @@ namespace AngryWasp.Net
 
             if (data.Length < Header.LENGTH + header.DataLength)
             {
-                Log.Instance.Write(Log_Severity.Error, "Incomplete data packet received");
+                Log.Instance.Write(Log_Severity.Error, $"{CommandCode.CommandString(header.Command)}: Incomplete data packet received");
                 return false;
             }
 
