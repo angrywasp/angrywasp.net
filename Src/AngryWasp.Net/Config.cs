@@ -1,3 +1,5 @@
+using System.Collections.Generic;
+
 namespace AngryWasp.Net
 {
     public class Node
@@ -18,12 +20,12 @@ namespace AngryWasp.Net
         public const ushort DEFAULT_PORT = 3500;
         public const int READ_BUFFER_SIZE = ushort.MaxValue;
         
-        //The number of data failures to accept before diching the connection
+        //The number of data failures to accept before ditching the connection
         public const int FAILURES_BEFORE_BAN = 3;
 
-        public static readonly Node[] SeedNodes = new Node[]
-        {
-            new Node { Host = "127.0.0.1", PeerID = 0, Port = 3500 }
-        };
+        public static readonly List<Node> SeedNodes = new List<Node>();
+
+        public static void AddSeedNode(string host, ushort port) =>
+            SeedNodes.Add(new Node { Host = host, PeerID = 0, Port = port });
     }
 }
