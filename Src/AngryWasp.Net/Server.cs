@@ -88,7 +88,7 @@ namespace AngryWasp.Net
                 ushort peerPort = BitShifter.ToUShort(body, ref offset);
 
                 //send a handshake packet back to the client to acknowledge the connection
-                ns.Write(Handshake.GenerateRequest(false));
+                ns.Write(Handshake.GenerateRequest(false).ToArray());
                 ConnectionManager.Add(new Connection(client, peerId, peerPort, Direction.Incoming));
             });
         }

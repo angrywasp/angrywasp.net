@@ -20,7 +20,7 @@ namespace AngryWasp.Net
 
                     NetworkStream ns = client.GetStream();
 
-                    ns.Write(Handshake.GenerateRequest(true));
+                    ns.Write(Handshake.GenerateRequest(true).ToArray());
 
                     bool accept = true;
                     Header header = null;

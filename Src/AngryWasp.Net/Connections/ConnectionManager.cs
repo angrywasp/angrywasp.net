@@ -44,14 +44,14 @@ namespace AngryWasp.Net
                     action(c.Value);
         }
 
-        public static byte[] GetPeerList()
+        public static List<byte> GetPeerList()
         {
             List<byte> bytes = new List<byte>();
             
             foreach(var c in connections)
                 bytes.AddRange(c.Value.GetPeerListBytes());
 
-            return bytes.ToArray();
+            return bytes;
         }
     }
 }

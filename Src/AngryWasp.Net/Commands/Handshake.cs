@@ -7,14 +7,11 @@ namespace AngryWasp.Net
     {
         public const byte CODE = 1;
 
-        public static byte[] GenerateRequest(bool isRequest)
+        public static List<byte> GenerateRequest(bool isRequest)
         {
-            List<byte> bytes = new List<byte>();
-            bytes.AddRange(Header.Create(CODE, isRequest, 12));
-            bytes.AddRange(BitShifter.ToByte(Server.PeerID));
-            bytes.AddRange(BitShifter.ToByte(Server.Port));
-
-            return bytes.ToArray();
+            return Header.Create(CODE, isRequest, 12)
+                .Join(BitShifter.ToByte(Server.PeerID))
+                .Join(BitShifter.ToByte(Server.Port));
         }
     }
 }

@@ -1,4 +1,5 @@
 using System;
+using System.Collections.Generic;
 using AngryWasp.Helpers;
 using AngryWasp.Logger;
 
@@ -27,15 +28,15 @@ namespace AngryWasp.Net
 
         public bool IsRequest => isRequest;
 
-        public static byte[] Create(byte command, bool isRequest = true, ushort dataLength = 0)
+        public static List<byte> Create(byte command, bool isRequest = true, ushort dataLength = 0)
         {
-            byte[] bytes = new byte[LENGTH];
-            Buffer.BlockCopy(SIGNATURE, 0, bytes, 0, 4);
-            Buffer.BlockCopy(PROTOCOL_VERSION, 0, bytes, 4, 2);
-            bytes[6] = Convert.ToByte(isRequest);
-            Buffer.BlockCopy(BitShifter.ToByte(Server.PeerID), 0, bytes, 7, 8);
-            bytes[15] = command;
-            Buffer.BlockCopy(BitShifter.ToByte(dataLength), 0, bytes, 16, 2);
+            List<byte> bytes = new List<byte>();
+            bytes.AddRange(SIGNATURE);
+            bytes.AddRange(PROTOCOL_VERSION);
+            bytes.Add(Convert.ToByte(isRequest));
+            bytes.AddRange(BitShifter.ToByte(Server.PeerID));
+            bytes.Add(command);
+            bytes.AddRange(BitShifter.ToByte(dataLength));
             return bytes;
         }
 

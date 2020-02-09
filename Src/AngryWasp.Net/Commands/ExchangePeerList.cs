@@ -7,16 +7,11 @@ namespace AngryWasp.Net
     {
         public const byte CODE = 2;
 
-        public static byte[] GenerateRequest(bool isRequest) 
+        public static List<byte> GenerateRequest(bool isRequest) 
         {
-            byte[] peers = ConnectionManager.GetPeerList();
-            byte[] header = Header.Create(ExchangePeerList.CODE, isRequest, (ushort)peers.Length);
-
-            List<byte> bytes = new List<byte>();
-            bytes.AddRange(header);
-            bytes.AddRange(peers);
-
-            return bytes.ToArray();
+            List<byte> peers = ConnectionManager.GetPeerList();
+            List<byte> header = Header.Create(ExchangePeerList.CODE, isRequest, (ushort)peers.Count);
+            return header.Join(peers);
         }
 
         public static void GenerateResponse(Connection c, Header h, byte[] d)
@@ -41,7 +36,7 @@ namespace AngryWasp.Net
 
             // if isRequest == true, we are on the server so we reply with a peer list of our own
             if (h.IsRequest)
-                c.Write(GenerateRequest(false));
+                c.Write(GenerateRequest(false).ToArray());
         }
     }
 }

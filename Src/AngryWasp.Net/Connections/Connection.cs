@@ -91,17 +91,14 @@ namespace AngryWasp.Net
             client.GetStream().Close();
         }
 
-        public byte[] GetPeerListBytes()
+        public List<byte> GetPeerListBytes()
         {
             IPEndPoint r = (IPEndPoint)client.Client.RemoteEndPoint;
 
-            List<byte> bytes = new List<byte>();
-
-            bytes.AddRange(r.Address.MapToIPv4().GetAddressBytes());
-            bytes.AddRange(BitShifter.ToByte((ushort)port));
-            bytes.AddRange(BitShifter.ToByte(peerId));
-
-            return bytes.ToArray();
+            return new List<byte>()
+                .Join(r.Address.MapToIPv4().GetAddressBytes())
+                .Join(BitShifter.ToByte((ushort)port))
+                .Join(BitShifter.ToByte(peerId));
         }
     }
 }
