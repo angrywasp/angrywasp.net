@@ -27,5 +27,14 @@ namespace AngryWasp.Net
 
         public static void AddSeedNode(string host, ushort port) =>
             SeedNodes.Add(new Node { Host = host, PeerID = 0, Port = port });
+
+        public static bool HasSeedNode(string host, ushort port)
+        {
+            foreach (var s in AngryWasp.Net.Config.SeedNodes)
+                if (s.Host == host && s.Port == port)
+                    return true;
+
+            return false;
+        }
     }
 }
