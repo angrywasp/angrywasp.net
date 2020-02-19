@@ -8,9 +8,9 @@
             "args": [
                 "build",
                 "/p:GenerateFullPaths=true",
-                "Configuration=Release",
-                "TargetFramework=netstandard2.0",
-                "TrimUnusedDependencies=true"
+                "/p:Configuration=Release",
+                "/p:TargetFramework=netstandard2.0",
+                "/p:TrimUnusedDependencies=true"
             ],
             "problemMatcher": "$msCompile"
         },
@@ -21,9 +21,9 @@
             "args": [
                 "build",
                 "/p:GenerateFullPaths=true",
-                "Configuration=Release",
-                "TargetFramework=netstandard2.1",
-                "TrimUnusedDependencies=true"
+                "/p:Configuration=Release",
+                "/p:TargetFramework=netstandard2.1",
+                "/p:TrimUnusedDependencies=true"
             ],
             "problemMatcher": "$msCompile"
         }
