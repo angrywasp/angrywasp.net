@@ -1,0 +1,31 @@
+{
+    "version": "2.0.0",
+    "tasks": [
+        {
+            "label": "build-netstandard-2.0",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "/p:GenerateFullPaths=true",
+                "Configuration=Release",
+                "TargetFramework=netstandard2.0",
+                "TrimUnusedDependencies=true"
+            ],
+            "problemMatcher": "$msCompile"
+        },
+        {
+            "label": "build-netstandard-2.1",
+            "command": "dotnet",
+            "type": "process",
+            "args": [
+                "build",
+                "/p:GenerateFullPaths=true",
+                "Configuration=Release",
+                "TargetFramework=netstandard2.1",
+                "TrimUnusedDependencies=true"
+            ],
+            "problemMatcher": "$msCompile"
+        }
+    ]
+}

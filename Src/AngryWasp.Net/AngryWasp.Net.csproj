@@ -1,7 +1,7 @@
 <Project Sdk="Microsoft.NET.Sdk">
-  <Import Project="../AngryWasp.Net.targets"/>
+  <Import Project="$(SolutionDir)External/AngryWasp.Build/AngryWasp.Build.Common.targets"/>
+  <Import Project="$(SolutionDir)Src/AngryWasp.Net.targets"/>
   <PropertyGroup>
     <OutputType>Library</OutputType>
-    <AssemblyName>AngryWasp.Net</AssemblyName>
   </PropertyGroup>
 </Project>
