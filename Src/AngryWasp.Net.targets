@@ -1,9 +1,0 @@
-<Project DefaultTargets="ValidateTargetFramework">
-  <Target Name="ValidateTargetFramework">
-    <Error Text="netstandard 2.0 is not supported by the AngryWasp.Net library." Condition="'$(TargetFramework)' == 'netstandard2.0'" />
-  </Target>
-  <ItemGroup>
-    <ProjectReference Include="$(SolutionDir)External/AngryWasp.Helpers/Src/AngryWasp.Helpers/AngryWasp.Helpers.csproj" />
-    <ProjectReference Include="$(SolutionDir)External/AngryWasp.Logger/Src/AngryWasp.Logger/AngryWasp.Logger.csproj" />
-  </ItemGroup>
-</Project>
