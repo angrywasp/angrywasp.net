@@ -30,7 +30,6 @@ namespace AngryWasp.Net
         public static void Process(Connection c, Header h, byte[] d)
         {
             string cmdName = CommandCode.CommandString(h.Command);
-            Log.Instance.Write($"Processing response for command {cmdName}");
 
             if (h.DataLength != d.Length)
             {

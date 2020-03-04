@@ -1,7 +1,6 @@
 using System;
 using System.Collections.Generic;
 using AngryWasp.Helpers;
-using AngryWasp.Logger;
 
 namespace AngryWasp.Net
 {
@@ -46,18 +45,12 @@ namespace AngryWasp.Net
             uint sig = BitShifter.ToUInt(bytes, ref offset);
 
             if (sig != SIGNATURE_INT)
-            {
-                Log.Instance.Write(Log_Severity.Error, "Invalid protocol signature");
                 return null;
-            }
 
             ushort ver = BitShifter.ToUShort(bytes, ref offset);
 
             if (ver != PROTOCOL_VERSION_INT)
-            {
-                Log.Instance.Write(Log_Severity.Error, "Protocol version mismatch");
                 return null;
-            }
 
             return new Header
             {
