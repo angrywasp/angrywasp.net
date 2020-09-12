@@ -55,7 +55,7 @@ namespace AngryWasp.Net
                 byte[] body = null;
                 string reason = null;
 
-                if (ns.Read(buff) < Header.LENGTH)
+                if (ns.Read(buff, 0, buff.Length) < Header.LENGTH)
                 {
                     accept = false;
                     reason = "Corrupt package header";
@@ -88,7 +88,8 @@ namespace AngryWasp.Net
                 ushort peerPort = BitShifter.ToUShort(body, ref offset);
 
                 //send a handshake packet back to the client to acknowledge the connection
-                ns.Write(Handshake.GenerateRequest(false).ToArray());
+                var request = Handshake.GenerateRequest(false);
+                ns.Write(request.ToArray(), 0, request.Count);
                 ConnectionManager.Add(new Connection(client, peerId, peerPort, Direction.Incoming));
             });
         }

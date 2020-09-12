@@ -61,7 +61,7 @@ namespace AngryWasp.Net
 
             try
             {
-                client.GetStream().Write(input);
+                client.GetStream().Write(input, 0, input.Length);
                 return true;
             }
             catch { return false; }

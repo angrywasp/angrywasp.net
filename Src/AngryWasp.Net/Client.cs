@@ -20,7 +20,8 @@ namespace AngryWasp.Net
 
                     NetworkStream ns = client.GetStream();
 
-                    ns.Write(Handshake.GenerateRequest(true).ToArray());
+                    var request = Handshake.GenerateRequest(true);
+                    ns.Write(request.ToArray(), 0, request.Count);
 
                     bool accept = true;
                     Header header = null;
@@ -28,7 +29,7 @@ namespace AngryWasp.Net
 
                     string reason = null;
 
-                    if (ns.Read(buff) < Header.LENGTH)
+                    if (ns.Read(buff, 0, buff.Length) < Header.LENGTH)
                     {
                         accept = false;
                         reason = "Corrupt package header";
